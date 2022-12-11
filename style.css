@@ -1,0 +1,16 @@
+.on-top {
+  z-index: 1;
+}
+.hidden {
+  display: none !important;
+}
+.fullscreen {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+#start-screen {
+  background: white;
+  display: grid;
+  place-content: center;
+}

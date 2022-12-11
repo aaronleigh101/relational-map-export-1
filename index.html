@@ -1,0 +1,266 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Relational Map</title>
+    <meta name="description" content="Relational Map" />
+
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script>
+      AFRAME.registerComponent("foo", {
+        init: function () {
+          this.el.addEventListener("model-loaded", (e) => {
+            const mesh = this.el.getObject3D("mesh");
+
+            mesh.traverse((node) => {
+              if (!node.material) return;
+              node.material.map.encoding = THREE.LinearEncoding;
+            });
+          });
+        },
+      });
+    </script>
+
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+  </head>
+  <body>
+    <div id="start-screen" class="on-top fullscreen">
+      <button id="btn-start">Click to start</button>
+    </div>
+
+    <a-scene
+      id="myscene"
+      renderer="colorManagement: true"
+      loading-screen="dotsColor: white; backgroundColor: black"
+    >
+      <a-sky color="#000000"></a-sky>
+
+      <a-assets>
+        <audio
+          id="rain"
+          src="https://cdn.glitch.global/a3712dc1-3ff2-4d1d-935d-c5c90e8a9062/mixkit-light-rain-loop-2393.wav?v=1670764757532"
+        ></audio>
+        <audio
+          id="bubble"
+          src="https://cdn.glitch.global/a3712dc1-3ff2-4d1d-935d-c5c90e8a9062/mixkit-liquid-bubble-3000.wav?v=1670767464485"
+        ></audio>
+      </a-assets>
+
+      <a-entity
+        camera
+        look-controls
+        orbit-controls="target: 0 0 0; minDistance: 0; maxDistance: 75; initialPosition: 0 5 15"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="sandstone_asset"
+        src="https://cdn.glitch.me/1819c83a-1bcd-4861-b711-ded366db397d/Sandstone.glb?v=1670443470696"
+      >
+      </a-asset-item>
+
+      <a-entity
+        on="start"
+        id="sandstone"
+        gltf-model="#sandstone_asset"
+        position="9 1.27 9"
+        scale="2 2 2"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 6000"
+        rotation="0 0 0"
+        sound="src: #rain;
+        volume: 10;
+        autoplay: true;
+        loop: true;
+        refDistance: 1;
+        rolloffFactor: 10"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="copper_asset"
+        src="https://cdn.glitch.me/bd7f4283-4579-4d44-b109-eea7dd76401d/Copper%202.glb?v=1670455448051"
+      >
+      </a-asset-item>
+
+      <a-entity
+        on="start"
+        id="copper"
+        gltf-model="#copper_asset"
+        position="9 1.13 0"
+        scale="2 2 2"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 6500"
+        rotation="0 0 0"
+        easing="linear"
+        foo
+        sound="src: #bubble;
+        volume: 6;
+        autoplay: true;
+        loop: true;
+        refDistance: 1;
+        rolloffFactor: 10"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="granite_asset"
+        src="https://cdn.glitch.me/bd7f4283-4579-4d44-b109-eea7dd76401d/Granite.glb?v=1670497826981"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="granite"
+        gltf-model="#granite_asset"
+        position="9 1.546 -9"
+        scale="1.4 1.4 1.4"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 7000"
+        rotation="0 0 0"
+        easing="linear"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="steel_asset"
+        src="https://cdn.glitch.global/bd7f4283-4579-4d44-b109-eea7dd76401d/Steel%203.glb?v=1670498897466"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="steel"
+        gltf-model="#steel_asset"
+        position="-9 1.39 9"
+        scale="2 2 2"
+        animation="property: rotation; to: 0 360 45 ; loop: true; dur: 7500"
+        rotation="0 0 45"
+        easing="linear"
+        foo
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="clay_asset"
+        src="https://cdn.glitch.global/bd7f4283-4579-4d44-b109-eea7dd76401d/Clay.glb?v=1670498117650"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="clay"
+        gltf-model="#clay_asset"
+        position="0 1.47 9"
+        scale="2 2 2"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 8000"
+        rotation="0 0 0"
+        easing="linear"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="polyester_asset"
+        src="https://cdn.glitch.global/a3712dc1-3ff2-4d1d-935d-c5c90e8a9062/Polyester.glb?v=1670757491215"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="polyester"
+        gltf-model="#polyester_asset"
+        position="-9 0 0"
+        scale="2 2 2"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 6000"
+        rotation="0 0 0"
+        easing="linear"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="iron_asset"
+        src="https://cdn.glitch.me/a3712dc1-3ff2-4d1d-935d-c5c90e8a9062/Iron.glb?v=1670757658713"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="iron"
+        gltf-model="#iron_asset"
+        position="0 1.92 -18"
+        scale="2 2 2"
+        animation="property: rotation; to: 0 360 45; loop: true; dur: 6500"
+        rotation="0 0 45"
+        easing="linear"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="concrete_asset"
+        src="https://cdn.glitch.me/a3712dc1-3ff2-4d1d-935d-c5c90e8a9062/Concrete.glb?v=1670757791397"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="concrete"
+        gltf-model="#concrete_asset"
+        position="0 0.96 -9"
+        scale="1.2 1.2 1.2"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 7000"
+        rotation="0 0 0"
+        easing="linear"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="paint_asset"
+        src="https://cdn.glitch.global/a3712dc1-3ff2-4d1d-935d-c5c90e8a9062/Spray%20Paint.glb?v=1670757882567"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="paint"
+        gltf-model="#paint_asset"
+        position="-9 1.73 -9"
+        scale="20 20 20"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 7500"
+        rotation="0 0 0"
+        easing="linear"
+      >
+      </a-entity>
+
+      <a-asset-item
+        id="petrol_asset"
+        src="https://cdn.glitch.global/a3712dc1-3ff2-4d1d-935d-c5c90e8a9062/Petrol.glb?v=1670758335451"
+      >
+      </a-asset-item>
+
+      <a-entity
+        id="petrol"
+        gltf-model="#petrol_asset"
+        position="0 -0.17 18"
+        scale="1 1 1"
+        animation="property: rotation; to: 0 360 0 ; loop: true; dur: 8000"
+        rotation="0 0 0"
+        easing="linear"
+      >
+      </a-entity>
+    </a-scene>
+
+    <div
+      class="glitchButton on-top"
+      style="position: fixed; top: 20px; right: 20px"
+    ></div>
+
+    <script defer>
+      document.querySelector("#btn-start").onclick = () => {
+        document.querySelector("#start-screen").classList.add("hidden");
+        document.querySelector("#sandstone").emit("start");
+        document.querySelector("#copper").emit("start");
+      };
+    </script>
+
+    <script src="https://button.glitch.me/button.js" defer></script>
+  </body>
+
+  <script>
+    var envmap = new THREE.RGBELoader().load(
+      "https://cdn.glitch.me/15bef7b8-8dd2-4ad9-b9b9-a59f7aaca5c1/rustig_koppie_puresky_8k.hdr?v=1669910795218"
+    );
+    scene.environment = envmap;
+  </script>
+</html>
